@@ -38,3 +38,4 @@ stages:
         containerRegistry: 'DockerHubConn'
         repository: 'azurevote'
         command: 'push'
+        imageNamesPath: 'd:\a\1\a' 
