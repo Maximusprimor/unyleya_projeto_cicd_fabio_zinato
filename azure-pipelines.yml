@@ -30,4 +30,10 @@ stages:
     - task: PublishPipelineArtifact@1
       inputs:   
         artifactName: 'AzureVote'
-        pathToPublish: 'd:\a\1\a'
+        pathToPublish: 'd:\a\1\a'    
+    - task: Docker@2
+      inputs:
+        containerRegistry: 'DockerHubConn'
+        repository: 'AzureVote'
+        command: 'buildAndPush'
+        Dockerfile: '**/Dockerfile'
