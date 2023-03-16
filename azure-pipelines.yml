@@ -28,5 +28,6 @@ stages:
         tags: |
           $(tag)
     - task: PublishPipelineArtifact@1
-      inputs:
-        artifactName: # 'drop'
+      inputs:   
+        artifactName: 'AzureVote'
+        pathToPublish: 'd:\a\1\a'
