@@ -36,4 +36,4 @@ stages:
         containerRegistry: 'DockerHubConn'
         repository: 'AzureVote'
         command: 'buildAndPush'
-        Dockerfile: '**/Dockerfile'
+        Dockerfile: '$(Build.SourcesDirectory)/azure-vote/Dockerfile'
