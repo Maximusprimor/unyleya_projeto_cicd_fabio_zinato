@@ -38,12 +38,5 @@ stages:
         repository: 'azurevote'
         command: 'buildAndPush'
         Dockerfile: '$(Build.SourcesDirectory)/azure-vote/Dockerfile'
-    - task: DockerCompose@0
-      inputs:
-        containerregistrytype: 'Azure Container Registry'
-        azureSubscription: 'AzureConn'
-        azureContainerRegistry: '{"loginServer":"unyleyaeadacr1.azurecr.io", "id" : "/subscriptions/17286c5c-7976-4042-8259-fc8f041cf62c/resourceGroups/aks_unyleya_ead/providers/Microsoft.ContainerRegistry/registries/unyleyaeadacr1"}'
-        dockerComposeFile: '**/docker-compose.yml'
-        action: 'Run a Docker Compose command'
-        dockerComposeCommand: 'up'
+    
 
