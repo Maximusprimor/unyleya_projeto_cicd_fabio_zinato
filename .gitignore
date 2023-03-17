@@ -103,3 +103,4 @@ ENV/
 # terraform
 Terraform/*.exe
 Terraform/.terraform*
+Terraform/terraform.*
