@@ -1,0 +1,6 @@
+resource_group_name = "aks_unyleya_ead"
+location = "East US"
+subscription_id="b4ffd6c9-7310-45bd-904c-c5b99d800e3f"
+tenant_id="82cf0b43-a639-49d3-a48a-db38c3e5c0c1"
+client_id="961f868e-9fae-4a02-beeb-150444c735d8"
+client_secret="Hvc8Q~~fZgSrZZhjkCyxjNBv8JI.t86vQlvJqbjn"
