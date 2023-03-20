@@ -39,7 +39,7 @@ stages:
         dockerRegistryEndpoint: 'DockerHubConn'
         command: 'Build an image'
         dockerFile: '$(Build.SourcesDirectory)/azure-vote/Dockerfile'
-        imageName: 'AzureVote'
+        imageName: 'azurevvote'
         includeLatestTag: true
         useDefaultContext: false
         buildContext: '.'
@@ -49,4 +49,4 @@ stages:
         containerregistrytype: 'Container Registry'
         dockerRegistryEndpoint: 'DockerHubConn'
         command: 'Push an image'
-        imageName: 'AzureVote'
+        imageName: 'azurevote'
