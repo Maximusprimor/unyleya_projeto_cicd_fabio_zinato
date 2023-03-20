@@ -45,7 +45,7 @@ stages:
       displayName: Build and push an image to ECR
       inputs:
         command: buildAndPush
-        repository: 'azurevote'
+        repository: 'unyleyaeadacr1.azurecr.io/azurevote'
         dockerfile: '$(Build.SourcesDirectory)/azure-vote/Dockerfile'
         containerRegistry: 'ECRConn'
         tags: |
