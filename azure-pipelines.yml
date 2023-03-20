@@ -36,7 +36,7 @@ stages:
       displayName: Build and push an image to DockerHub
       inputs:
         command: buildAndPush
-        repository: 'azurevote'
+        repository: 'maximusprimor/azurevote'
         dockerfile: '$(Build.SourcesDirectory)/azure-vote/Dockerfile'
         containerRegistry: 'DockerHubConn'
         tags: |
