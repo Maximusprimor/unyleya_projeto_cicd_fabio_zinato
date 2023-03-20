@@ -32,17 +32,21 @@ stages:
       inputs:
         artifactName: 'AzureVote'
         pathToPublish: 'd:\a\1\a'
-    - task: Docker@2
+    - task: Docker@1
+      displayName: 'Build the Docker image'
       inputs:
-        containerRegistry: 'DockerHubConn'
-        command: 'logout'
-    - task: Docker@2
+        containerregistrytype: 'Container Registry'
+        dockerRegistryEndpoint: 'DockerHubConn'
+        command: 'Build an image'
+        dockerFile: '$(Build.SourcesDirectory)/azure-vote/Dockerfile'
+        imageName: '$(ImageName)'
+        includeLatestTag: true
+        useDefaultContext: false
+        buildContext: '.'
+    - task: Docker@1
+      displayName: 'Push the Docker image to Dockerhub'
       inputs:
-        containerRegistry: 'DockerHubConn'
-        command: 'login'
-    - task: Docker@2
-      inputs:
-        containerRegistry: 'DockerHubConn'
-        repository: 'azurevote'
-        command: 'buildAndPush'
-        Dockerfile: '$(Build.SourcesDirectory)/azure-vote/Dockerfile'
+        containerregistrytype: 'Container Registry'
+        dockerRegistryEndpoint: 'DockerHubConn'
+        command: 'Push an image'
+        imageName: '$(ImageName)'
