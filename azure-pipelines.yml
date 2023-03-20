@@ -32,5 +32,11 @@ stages:
       inputs:
         artifactName: 'AzureVote'
         pathToPublish: 'd:\a\1\a'
-    
+    - task: Docker@2
+      inputs:
+        containerRegistry: 'DockerHubConn'
+        command: 'login'
+        repository: 'azurevote'
+        command: 'buildAndPush'
+        Dockerfile: '$(Build.SourcesDirectory)/azure-vote/Dockerfile'
 
