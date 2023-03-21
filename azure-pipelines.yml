@@ -42,7 +42,7 @@ stages:
         tags: |
           $(tag)
     - task: Docker@2
-      displayName: Build and push an image to ECR
+      displayName: Build and push an image to ACR
       inputs:
         command: buildAndPush
         repository: 'unyleyaeadacr1.azurecr.io/azurevote'
