@@ -47,6 +47,6 @@ stages:
         command: buildAndPush
         repository: 'unyleyaeadacr1.azurecr.io/azurevote'
         dockerfile: '$(Build.SourcesDirectory)/azure-vote/Dockerfile'
-        containerRegistry: 'ECRConn'
+        containerRegistry: 'ACRConn'
         tags: |
           $(tag)
