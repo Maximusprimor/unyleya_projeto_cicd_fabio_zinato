@@ -4,50 +4,49 @@ resource "azurerm_resource_group" "rg" {
 }
 
 resource "azurerm_container_registry" "acr" {
-  name                     = "unyleyaeadacr"
+  name                     = "unyleyaeadacr1"
   resource_group_name      = azurerm_resource_group.rg.name
-  location                 = azurerm_resource_group.rg.location
-  sku                      = "Basic"
+  location                 = var.location
+  sku                      = "Standard"
   admin_enabled            = true
 }
 
+data "azurerm_container_registry" "acr" {
+  name                     = azurerm_container_registry.acr.name
+  resource_group_name      = azurerm_resource_group.rg.name
+
+  depends_on = [azurerm_container_registry.acr]
+}
+
 resource "azurerm_kubernetes_cluster" "aks" {
-  name                = "unyleyaeadaks"
+  name                = "unyleyaeadaks1"
   resource_group_name = azurerm_resource_group.rg.name
   location            = azurerm_resource_group.rg.location
-  dns_prefix          = "unyleyaeadaks"
-  enable_attach_acr   = true
-  scope               = azurerm_container_registry.acr.id
+  dns_prefix          = "unyleyaeadaks1"
 
   default_node_pool {
-    name       = "default"
-    node_count = 1
-    vm_size    = "Standard_DS2_v2"
-  }
-
-  linux_profile {
-    admin_username = "unyleyauser"
-
-    ssh_key {
-      key_data = file(var.ssh_public_key)
-    }
+    name                  = "default"
+    vm_size               = "Standard_D2_v2"
+    enable_auto_scaling   = false
+    node_count            = 1
+    type                  = "VirtualMachineScaleSets"
+    enable_node_public_ip = false
   }
 
   network_profile {
-    network_plugin    = "kubenet"
+    network_plugin = "azure"
     load_balancer_sku = "standard"
   }
 
-  service_principal {
-    client_id     = var.client_id
-    client_secret = var.client_secret
+  identity {
+    type = "SystemAssigned"
   }
 
   depends_on = [azurerm_container_registry.acr]
 }
 
 resource "azurerm_network_security_group" "nsg" {
-  name                = "unyleyaeadnsg"
+  name                = "unyleyaeadnsg1"
   resource_group_name = azurerm_resource_group.rg.name
   location            = azurerm_resource_group.rg.location
 }
@@ -66,4 +65,12 @@ resource "azurerm_network_security_rule" "nsr" {
   network_security_group_name = azurerm_network_security_group.nsg.name
   
   depends_on = [azurerm_kubernetes_cluster.aks]  
+}
+
+resource "azurerm_role_assignment" "acrpull_role" {
+  scope                = data.azurerm_container_registry.acr.id
+  role_definition_name = "AcrPull"
+  principal_id         = azurerm_kubernetes_cluster.aks.kubelet_identity[0].object_id
+
+  depends_on = [azurerm_kubernetes_cluster.aks]
 }

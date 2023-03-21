@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: myconfig
+data:
+  myconfig.yaml: |-
+    {{ .Files.Get "azure-vote-all-in-one-redis.yaml" | nindent 4 }}
