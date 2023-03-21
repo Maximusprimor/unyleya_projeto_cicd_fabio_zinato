@@ -45,7 +45,7 @@ stages:
       displayName: Build and push an image to ACR
       inputs:
         command: buildAndPush
-        repository: 'unyleyaeadacr1.azurecr.io/azurevote'
+        repository: 'unyleyaeadacr1/azurevote'
         dockerfile: '$(Build.SourcesDirectory)/azure-vote/Dockerfile'
         containerRegistry: 'ACRConn'
         tags: |
