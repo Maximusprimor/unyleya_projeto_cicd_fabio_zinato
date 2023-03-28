@@ -31,7 +31,7 @@ stages:
       displayName: Build image Artifact
       inputs:
         artifactName: 'AzureVote'
-        pathToPublish: 'd:\a\1\a'
+        pathToPublish: 'd:\a\r1\a'
     - task: Docker@2
       displayName: Build and push an image to DockerHub
       inputs:
