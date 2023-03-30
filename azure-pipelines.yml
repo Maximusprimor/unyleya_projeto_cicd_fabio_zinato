@@ -30,7 +30,7 @@ stages:
     - task: PublishPipelineArtifact@1
       displayName: Build image Artifact
       inputs:
-        artifactName: 'AzureVote'
+        artifactName: 'azurevote'
         pathToPublish: 'd:\a\1\a'
     - task: Docker@2
       displayName: Build and push an image to DockerHub
@@ -45,7 +45,7 @@ stages:
       displayName: Build and push an image to ACR
       inputs:
         command: buildAndPush
-        repository: 'unyleyaeadacr1/azurevote'
+        repository: 'azurevote'
         dockerfile: '$(Build.SourcesDirectory)/azure-vote/Dockerfile'
         containerRegistry: 'ACRConn'
         tags: |
